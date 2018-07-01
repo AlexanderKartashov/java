@@ -10,7 +10,7 @@ public class CellsFieldSplitter {
     List<Pair> split(ICellsField src, ICellsField dst) {
         List<Pair> result = new ArrayList<>();
 
-        final int size = 1000;
+        final int size = 500;
         for (int i = 0; i < src.Width(); i = i + size) {
             final int width = ((i + size) > src.Width())
                     ? (src.Width() - i)
