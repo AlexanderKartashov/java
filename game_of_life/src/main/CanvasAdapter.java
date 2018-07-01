@@ -1,5 +1,6 @@
 package main;
 
+import app.ICanvas;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;

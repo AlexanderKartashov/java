@@ -1,6 +1,6 @@
-package main;
+package app;
 
-interface IControlPanel {
+public interface IControlPanel {
     void doOnClear(IActionCallback callback);
     void doOnRandom(IActionCallback callback);
     void doOnNext(IActionCallback callback);

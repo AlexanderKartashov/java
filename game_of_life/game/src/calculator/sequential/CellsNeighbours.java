@@ -1,4 +1,4 @@
-package iteration;
+package calculator.sequential;
 
 import calculator.ICellNeighbours;
 import type.CellState;

@@ -1,4 +1,4 @@
-package iteration;
+package calculator;
 
 import type.CellState;
 import type.ICell;

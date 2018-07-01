@@ -1,8 +1,5 @@
-package main;
+package app;
 
-import app.GameApplication;
-import javafx.application.Platform;
-import sun.util.resources.pl.CalendarData_pl;
 import type.CellState;
 import type.ICellsField;
 
@@ -10,18 +7,19 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PaneController {
 
-    public PaneController(ICanvas canvas, GameApplication app, IControlPanel pane) {
+    public PaneController(ICanvas canvas, IGameApplication app, IControlPanel pane,
+                          IAppEventListener eventListener, ITaskExecutor executor) {
         _canvas = canvas;
         _app = app;
         _pane = pane;
+        _executor = executor;
         initPaneCallbacks();
-        _app.GetController().Add(()->{
-            Platform.runLater(this::onCalcComplete);
-        });
+        eventListener.doOnCalcComplete(this::onCalcComplete);
+
         onClear();
     }
 
-    private void onStart() {
+    private void onStart() throws Exception {
         _continue.set(true);
         calcNextState();
     }
@@ -34,7 +32,7 @@ public class PaneController {
         _app.GetController().clear();
     }
 
-    private void onNext() {
+    private void onNext() throws Exception {
         _continue.set(false);
         calcNextState();
     }
@@ -43,18 +41,18 @@ public class PaneController {
         _continue.set(false);
     }
 
-    private void calcNextState(){
+    private void calcNextState() throws Exception{
         _pane.calculationInProgress();
-        final Runnable task = new Runnable() {
-            @Override
-            public void run() {
+        _executor.Execute(()-> {
+            try {
                 _app.GetController().start();
+            } catch (InterruptedException e) {
+                _pane.calculationComplete();
             }
-        };
-        task.run();
+        });
     }
 
-    private void onCalcComplete() {
+    private void onCalcComplete() throws Exception {
         final ICellsField cells = _app.GetCurrentField();
         for(int i = 0; i < cells.Width(); ++i) {
             for (int j = 0; j < cells.Height(); ++j) {
@@ -80,6 +78,7 @@ public class PaneController {
 
     private AtomicBoolean _continue = new AtomicBoolean(false);
     private final ICanvas _canvas;
-    private final GameApplication _app;
+    private final IGameApplication _app;
     private final IControlPanel _pane;
+    private final ITaskExecutor _executor;
 }

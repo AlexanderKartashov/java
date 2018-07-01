@@ -1,6 +1,5 @@
 package app;
 
-import iteration.GameIterationFactory;
 import iteration.IGameIteration;
 import iteration.observer.IGameIterationObserver;
 import type.CellState;
@@ -10,20 +9,27 @@ import type.ICellsField;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameApplication {
-    public GameApplication(int w, int h) {
+class GameApplication implements IGameApplication{
+    public GameApplication(int w, int h, IGameIteration calculator) {
         _currentField = new CellsField(w, h);
         _newFiled = new CellsField(w, h);
-        _iteration = new GameIterationFactory().CreateCalculator();
+        _iteration = calculator;
         _controller = new GameController();
         _iteration.Add(_controller);
     }
 
+    @Override
     public IGameController GetController() {
         return _controller;
     }
 
+    @Override
     public ICellsField GetCurrentField() { return _currentField; }
+
+    @Override
+    public void close() throws Exception {
+        _iteration.close();
+    }
 
     private ICellsField _currentField;
     private ICellsField _newFiled;
@@ -34,7 +40,7 @@ public class GameApplication {
     private class GameController implements IGameController, IGameIterationObserver {
 
         @Override
-        public void start() {
+        public void start() throws InterruptedException {
             CalcNextState();
         }
 
@@ -86,7 +92,7 @@ public class GameApplication {
             }
         }
 
-        private synchronized void CalcNextState() {
+        private synchronized void CalcNextState() throws InterruptedException {
             _iteration.NextState(_currentField, _newFiled);
             ICellsField temp = _currentField;
             _currentField = _newFiled;

@@ -1,5 +1,9 @@
-package calculator;
+package calculator.cellStateCalculator;
 
+import calculator.ICellNeighbours;
+import calculator.cellStateCalculator.IAliveCellStateProcessor;
+import calculator.cellStateCalculator.ICellStateCalculator;
+import calculator.cellStateCalculator.IDeadCellStateProcessor;
 import type.CellState;
 import type.ICell;
 

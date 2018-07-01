@@ -1,4 +1,4 @@
-package calculator;
+package calculator.cellStateCalculator;
 
 @FunctionalInterface
 public interface ICellStateCalculatorFactory {
