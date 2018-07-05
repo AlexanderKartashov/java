@@ -1,7 +1,6 @@
 package calculator;
 
 import type.CellState;
-import type.ICell;
 import type.ICellsField;
 
 class ReadOnlyCellsFieldProxy implements ICellsField {
@@ -11,8 +10,8 @@ class ReadOnlyCellsFieldProxy implements ICellsField {
     }
 
     @Override
-    public ICell GetCell(int x, int y) {
-        return _realObject.GetCell(x, y);
+    public CellState GetCellState(int x, int y) {
+        return _realObject.GetCellState(x, y);
     }
 
     @Override

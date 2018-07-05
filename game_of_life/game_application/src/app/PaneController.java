@@ -56,7 +56,7 @@ public class PaneController {
         final ICellsField cells = _app.GetCurrentField();
         for(int i = 0; i < cells.Width(); ++i) {
             for (int j = 0; j < cells.Height(); ++j) {
-                _canvas.SetCellState(i, j, cells.GetCell(i, j).GetState() == CellState.Alive);
+                _canvas.SetCellState(i, j, cells.GetCellState(i, j) == CellState.Alive);
             }
         }
 

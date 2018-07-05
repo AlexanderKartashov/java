@@ -8,26 +8,24 @@ public class CellsField implements ICellsField {
         _width = width;
         _height = height;
 
-        _cells = new ArrayList<>();
+        _cells = new CellState[_width][_height];
         for(int i = 0; i < _width; ++i){
-            List<IMutableCell> cellsRow = new ArrayList<>();
             for(int j = 0; j < _height; ++j) {
-                cellsRow.add(new Cell());
+                _cells[i][j] = CellState.Dead;
             }
-            _cells.add(cellsRow);
         }
     }
 
     @Override
-    public ICell GetCell(int x, int y) {
+    public CellState GetCellState(int x, int y) {
         ValidateIndices(x, y);
-        return _cells.get(x).get(y);
+        return _cells[x][y];
     }
 
     @Override
     public void SetCellState(int x, int y, CellState state) {
         ValidateIndices(x, y);
-        _cells.get(x).get(y).SetState(state);
+        _cells[x][y] = state;
     }
 
     @Override
@@ -47,7 +45,7 @@ public class CellsField implements ICellsField {
         }
     }
 
-    private List<List<IMutableCell>> _cells;
+    private CellState[][] _cells;
     private final int _width;
     private final int _height;
 }

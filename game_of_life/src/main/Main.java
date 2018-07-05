@@ -42,8 +42,8 @@ public class Main extends Application {
         _app.close();
     }
 
-    private final int _w = 3500;
-    private final int _h = 2000;
+    private final int _w = 2700;
+    private final int _h = 1600;
     private Canvas _canvas;
     private IGameApplication _app = new ParallelGameAppFactory().CreateApp(_w, _h);
     private PaneController _controller;

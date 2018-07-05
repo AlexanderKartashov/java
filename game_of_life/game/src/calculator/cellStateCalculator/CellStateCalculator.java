@@ -1,11 +1,7 @@
 package calculator.cellStateCalculator;
 
 import calculator.ICellNeighbours;
-import calculator.cellStateCalculator.IAliveCellStateProcessor;
-import calculator.cellStateCalculator.ICellStateCalculator;
-import calculator.cellStateCalculator.IDeadCellStateProcessor;
 import type.CellState;
-import type.ICell;
 
 class CellStateCalculator implements ICellStateCalculator {
 
@@ -15,8 +11,8 @@ class CellStateCalculator implements ICellStateCalculator {
     }
 
     @Override
-    public CellState GetCellState(ICell currentCell, ICellNeighbours neighbours) {
-        return currentCell.GetState() == CellState.Alive ?
+    public CellState GetCellState(CellState currentCell, ICellNeighbours neighbours) {
+        return currentCell == CellState.Alive ?
                 _aliveCell.GetState(neighbours) :
                 _deadCell.GetState(neighbours);
     }

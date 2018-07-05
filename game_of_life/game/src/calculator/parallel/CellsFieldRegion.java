@@ -1,7 +1,6 @@
 package calculator.parallel;
 
 import type.CellState;
-import type.ICell;
 import type.ICellsField;
 
 class CellsFieldRegion implements ICellsField {
@@ -15,8 +14,8 @@ class CellsFieldRegion implements ICellsField {
     }
 
     @Override
-    public ICell GetCell(int x, int y) {
-        return _field.GetCell(
+    public CellState GetCellState(int x, int y) {
+        return _field.GetCellState(
                 getRealCoordinate(_startX, x),
                 getRealCoordinate(_startY, y)
         );
