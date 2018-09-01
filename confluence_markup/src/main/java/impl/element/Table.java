@@ -2,9 +2,9 @@ package impl.element;
 
 import com.google.java.contract.Requires;
 import interfaces.IElement;
-import interfaces.IStyle;
 import interfaces.elements.ITable;
 import interfaces.elements.ITableRow;
+import interfaces.elements.TableRowStyle;
 
 import java.util.Optional;
 
@@ -20,9 +20,9 @@ class Table extends ElementsCollection implements ITable
 	}
 
 	@Override
-	public ITableRow addRow(IStyle style)
+	public ITableRow addRow(TableRowStyle style)
 	{
-		final ITableRow row = new TableRow(_columns.length);
+		final ITableRow row = new TableRow(_columns.length, style);
 		add(row);
 		return row;
 	}
