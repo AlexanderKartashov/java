@@ -2,9 +2,7 @@ package interfaces;
 
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;
-import interfaces.elements.IList;
-import interfaces.elements.ITable;
-import interfaces.elements.ToggleButtonState;
+import interfaces.elements.*;
 
 public interface IElementFactory {
 	@Requires({"columns != null", "columns.length > 0"})
@@ -16,9 +14,10 @@ public interface IElementFactory {
 	IElement createButton(ToggleButtonState state);
 
 	@Ensures("result != null")
-	@Requires({"text != null", "text.length() > 0"})
-	IElement createText(String text);
+	@Requires({"text != null", "text.length() > 0", "style != null"})
+	IElement createText(String text, TextStyle style);
 
+	@Requires("style != null")
 	@Ensures("result != null")
-	IList createList();
+	IList createList(ListStyle style);
 }

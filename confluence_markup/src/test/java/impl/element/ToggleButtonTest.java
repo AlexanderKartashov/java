@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ToggleButtonTest
 {
 	@Test
-	public void testConstructorContract()
+	void testConstructorContract()
 	{
 		assertThrows(PreconditionError.class, ()->new ToggleButton(null));
 		new ToggleButton(ToggleButtonState.Red);

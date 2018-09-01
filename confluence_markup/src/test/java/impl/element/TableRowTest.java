@@ -13,13 +13,13 @@ class TableRowTest
 {
 	@ParameterizedTest
 	@ValueSource(ints = {-1, 0})
-	public void testConstructorContracts(int value)
+	void testConstructorContracts(int value)
 	{
 		assertThrows(PreconditionError.class, ()->new TableRow(value));
 	}
 
 	@Test
-	public void testFixedSizeRow()
+	void testFixedSizeRow()
 	{
 		ITableRow row = new TableRow(2);
 		assertThrows(PreconditionError.class, ()->row.addItem(null));

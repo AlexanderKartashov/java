@@ -2,9 +2,7 @@ package impl.element;
 
 import interfaces.IElement;
 import interfaces.IElementFactory;
-import interfaces.elements.IList;
-import interfaces.elements.ITable;
-import interfaces.elements.ToggleButtonState;
+import interfaces.elements.*;
 
 public class ElementFactory implements IElementFactory
 {
@@ -21,14 +19,14 @@ public class ElementFactory implements IElementFactory
 	}
 
 	@Override
-	public IElement createText(String text)
+	public IElement createText(String text, TextStyle style)
 	{
-		return new Text(text);
+		return new Text(text, style);
 	}
 
 	@Override
-	public IList createList()
+	public IList createList(ListStyle style)
 	{
-		return new List();
+		return new List(style);
 	}
 }

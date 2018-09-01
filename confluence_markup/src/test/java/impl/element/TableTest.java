@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class TableTest
 {
 	@Test
-	public void testConstructorContract()
+	void testConstructorContract()
 	{
 		assertThrows(PreconditionError.class, ()->new Table(null));
 		assertThrows(PreconditionError.class, ()->new Table(new IElement[]{}));

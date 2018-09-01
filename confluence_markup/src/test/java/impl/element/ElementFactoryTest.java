@@ -2,6 +2,8 @@ package impl.element;
 
 import com.google.java.contract.PreconditionError;
 import interfaces.IElement;
+import interfaces.elements.ListStyle;
+import interfaces.elements.TextStyle;
 import interfaces.elements.ToggleButtonState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,14 +41,16 @@ class ElementFactoryTest
 	@Test
 	void testCreateText()
 	{
-		assertThrows(PreconditionError.class, ()->_factory.createText(null));
-		assertThrows(PreconditionError.class, ()->_factory.createText(""));
-		assertThat(_factory.createText("text"), notNullValue());
+		assertThrows(PreconditionError.class, ()->_factory.createText(null, null));
+		assertThrows(PreconditionError.class, ()->_factory.createText("", null));
+		assertThrows(PreconditionError.class, ()->_factory.createText(null, TextStyle.Header));
+		assertThat(_factory.createText("text", TextStyle.Header), notNullValue());
 	}
 
 	@Test
 	void testCreateList()
 	{
-		assertThat(_factory.createList(), notNullValue());
+		assertThrows(PreconditionError.class, ()->_factory.createList(null));
+		assertThat(_factory.createList(ListStyle.Numbers), notNullValue());
 	}
 }
