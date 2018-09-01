@@ -1,4 +1,5 @@
 package interfaces;
 
-public interface IElement {
+public interface IElement extends IAcceptor {
+	Iterable<IElement> subElements();
 }

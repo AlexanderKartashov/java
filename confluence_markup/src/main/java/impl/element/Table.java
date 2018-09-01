@@ -2,13 +2,16 @@ package impl.element;
 
 import com.google.java.contract.Requires;
 import interfaces.IElement;
-import interfaces.elements.ITable;
-import interfaces.elements.ITableRow;
+import interfaces.IElementVisitor;
 import interfaces.elements.TableRowStyle;
+import interfaces.elements.immutable.ITableRow;
+import interfaces.elements.mutable.IMutableTable;
+import interfaces.elements.mutable.IMutableTableRow;
 
+import java.util.Arrays;
 import java.util.Optional;
 
-class Table extends ElementsCollection implements ITable
+class Table extends ElementsCollection implements IMutableTable
 {
 	private final IElement[] _columns;
 
@@ -20,10 +23,28 @@ class Table extends ElementsCollection implements ITable
 	}
 
 	@Override
-	public ITableRow addRow(TableRowStyle style)
+	public IMutableTableRow addRow(TableRowStyle style)
 	{
-		final ITableRow row = new TableRow(_columns.length, style);
+		final IMutableTableRow row = new TableRow(_columns.length, style);
 		add(row);
 		return row;
+	}
+
+	@Override
+	public Iterable<IElement> subElements()
+	{
+		return super.elements();
+	}
+
+	@Override
+	public void accept(IElementVisitor visitor)
+	{
+		visitor.visit(this);
+	}
+
+	@Override
+	public Iterable<IElement> columns()
+	{
+		return Arrays.asList(_columns);
 	}
 }

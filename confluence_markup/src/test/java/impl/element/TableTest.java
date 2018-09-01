@@ -2,9 +2,11 @@ package impl.element;
 
 import com.google.java.contract.PreconditionError;
 import interfaces.IElement;
-import interfaces.elements.ITable;
+import interfaces.elements.immutable.ITable;
 import interfaces.elements.TableRowStyle;
+import interfaces.elements.mutable.IMutableTable;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -20,7 +22,7 @@ class TableTest
 	@Test
 	void testAddRow()
 	{
-		ITable table = new Table(new IElement[]{new IElement() {}});
+		IMutableTable table = new Table(new IElement[]{ Mockito.mock(IElement.class) });
 		table.addRow(TableRowStyle.NotNew);
 		assertThrows(PreconditionError.class, ()->table.addRow(null));
 	}

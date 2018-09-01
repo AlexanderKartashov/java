@@ -2,12 +2,13 @@ package impl.element;
 
 import com.google.java.contract.Requires;
 import interfaces.IElement;
-import interfaces.elements.IList;
+import interfaces.IElementVisitor;
 import interfaces.elements.ListStyle;
+import interfaces.elements.mutable.IMutableList;
 
 import java.util.Optional;
 
-class List extends ElementsCollection implements IList
+class List extends ElementsCollection implements IMutableList
 {
 	private final ListStyle _style;
 
@@ -22,5 +23,23 @@ class List extends ElementsCollection implements IList
 	public void addItem(IElement item)
 	{
 		add(item);
+	}
+
+	@Override
+	public ListStyle style()
+	{
+		return _style;
+	}
+
+	@Override
+	public Iterable<IElement> subElements()
+	{
+		return super.elements();
+	}
+
+	@Override
+	public void accept(IElementVisitor visitor)
+	{
+		visitor.visit(this);
 	}
 }

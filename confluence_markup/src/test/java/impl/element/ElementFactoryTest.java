@@ -7,6 +7,7 @@ import interfaces.elements.TextStyle;
 import interfaces.elements.ToggleButtonState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -28,7 +29,7 @@ class ElementFactoryTest
 	{
 		assertThrows(PreconditionError.class, ()->_factory.createTable(null));
 		assertThrows(PreconditionError.class, ()->_factory.createTable(new IElement[]{}));
-		assertThat(_factory.createTable(new IElement[]{ new IElement(){} }), notNullValue());
+		assertThat(_factory.createTable(new IElement[]{Mockito.mock(IElement.class)}), notNullValue());
 	}
 
 	@Test
